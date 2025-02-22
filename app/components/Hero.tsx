@@ -48,17 +48,19 @@ const LandingPage = () => {
   });
 
   // Handle input changes
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+  
 
-  // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert("Thank you for your message! We'll get back to you soon.");
-    setFormData({ firstName: "", lastName: "", email: "", message: "" });
-  };
+ // Handle form submission
+const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  alert("Thank you for your message! We'll get back to you soon.");
+  setFormData({ firstName: "", lastName: "", email: "", message: "" });
+};
+
 
   return (
     <>
@@ -231,7 +233,7 @@ const LandingPage = () => {
         id="pricing"
       >
         <Container className="text-center">
-        <h2 className="fw-bold display-5 bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 text-transparent bg-clip-text">Choose Your Plan</h2>
+           <h2 className="fw-bold display-5 bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 text-transparent bg-clip-text">Choose Your Plan</h2>
           <p className="text-secondary mb-4">
             Scale your AI capabilities with our flexible pricing
           </p>
