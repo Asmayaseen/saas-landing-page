@@ -1,4 +1,5 @@
-"use client"; // ✅ Required for React Bootstrap in Next.js 15
+"use client"; // Required for React Bootstrap in Next.js 15
+import React, { useState } from "react";
 import {
   Button,
   Container,
@@ -9,338 +10,330 @@ import {
   Col,
   Card,
 } from "react-bootstrap";
-import { BsCpu } from "react-icons/bs";
-import { BsChatSquareText } from "react-icons/bs";
-import { BsCodeSlash } from "react-icons/bs";
-import { BsShieldLock } from "react-icons/bs";
+import {
+  BsCpu,
+  BsChatSquareText,
+  BsCodeSlash,
+  BsShieldLock,
+  BsCheckCircle,
+  BsEnvelope,
+  BsLinkedin,
+  BsTwitter,
+  BsGithub,
+  BsGlobe,
+  BsCode,
+} from "react-icons/bs";
 import { FaRobot } from "react-icons/fa";
-import { BsCode } from "react-icons/bs";
-import { BsGlobe } from "react-icons/bs";
-// import {BsLayers} from "react-icons/bs";
-import { BsCheckCircle } from "react-icons/bs";
-import { BsEnvelope, BsLinkedin, BsTwitter, BsGithub } from "react-icons/bs";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
+import { motion } from "framer-motion";
 
-export default function HeroSection() {
+// Animation Variants
+const fadeIn = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
+
+const scaleUp = {
+  hidden: { scale: 0.9, opacity: 0 },
+  visible: { scale: 1, opacity: 1, transition: { duration: 0.5 } },
+};
+
+const LandingPage = () => {
+  // State for form data
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    message: "",
+  });
+
+  // Handle input changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert("Thank you for your message! We'll get back to you soon.");
+    setFormData({ firstName: "", lastName: "", email: "", message: "" });
+  };
+
   return (
     <>
-      {/* Hero Section */}
-      <div className="bg-black text-white vh-100 d-flex flex-column align-items-center justify-content-center px-3">
-        {/* Navbar */}
-        <Navbar
-          expand="md"
-          variant="dark"
-          className="w-100 py-3 position-absolute top-0"
-        >
-          <Container>
-            <Navbar.Brand className="fw-bold text-warning">
-              💻 Agentia World
-            </Navbar.Brand>
-            <Navbar.Toggle aria-controls="navbar-nav" />
-            <Navbar.Collapse id="navbar-nav">
-              <Nav className="ms-auto">
-                <Nav.Link href="#features" className="text-light">
-                  Features
-                </Nav.Link>
-                <Nav.Link href="#technology" className="text-light">
-                  Technology
-                </Nav.Link>
-                <Nav.Link href="#agents" className="text-light">
-                  Agents
-                </Nav.Link>
-                <Nav.Link href="#pricing" className="text-light">
-                  Pricing
-                </Nav.Link>
-                <Nav.Link href="#contact" className="text-light">
-                  Contact
-                </Nav.Link>
-              </Nav>
-              <Button variant="primary" className="ms-3">
-                Launch Console
-              </Button>
-            </Navbar.Collapse>
-          </Container>
-        </Navbar>
-
-        {/* Hero Section Content */}
-        <Container className="text-center mt-5">
-          <p className="text-info mb-2">💡 POWERED BY PANAVERSITY</p>
-          <h1 className="display-4 fw-bold">
-            Enterprise <span className="text-primary">AI Agents</span>
-            <br /> for the Future
-          </h1>
+      {/* Navbar */}
+      <Navbar expand="md" variant="dark" className="w-100 py-3 bg-black fixed-top">
+        <Container>
+          <Navbar.Brand className="fw-bold text-warning">
+            💻 Agentia World
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="navbar-nav" />
+          <Navbar.Collapse id="navbar-nav">
+            <Nav className="ms-auto">
+              <Nav.Link href="#features" className="text-light">
+                Features
+              </Nav.Link>
+              <Nav.Link href="#technology" className="text-light">
+                Technology
+              </Nav.Link>
+              <Nav.Link href="#agents" className="text-light">
+                Agents
+              </Nav.Link>
+              <Nav.Link href="#pricing" className="text-light">
+                Pricing
+              </Nav.Link>
+              <Nav.Link href="#contact" className="text-light">
+                Contact
+              </Nav.Link>
+            </Nav>
+            <Button
+            className="px-6 py-3 bg-gradient-to-tr from-purple-500 to-blue-600 rounded-xl hover:scale-105 transition-transform"
+            size="lg"
+          >
+              Launch Console
+            </Button>
+          </Navbar.Collapse>
         </Container>
+      </Navbar>
 
-        {/* Search Bar */}
-        <div className="position-relative mt-4 w-50">
-          <Form.Control
+      {/* Hero Section */}
+      <motion.section
+        initial="hidden"
+        animate="visible"
+        variants={fadeIn}
+        className="h-screen flex flex-col items-center justify-center bg-gradient-to-b from-black to-purple-900 text-white px-6"
+      >
+        <p className="text-purple-600 py-2 px-4 bg-gray-900 rounded-xl w-fit text-sm">
+          🟣 POWERED BY PANAVERSITY
+        </p>
+        <h1 className="text-6xl md:text-7xl font-bold bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 text-transparent bg-clip-text text-center mt-4">
+          Enterprise AI Agents <br /> for the Future
+        </h1>
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={scaleUp}
+          className="relative mt-6 w-full max-w-lg"
+        >
+          <input
             type="text"
-            className="p-3 rounded bg-dark border border-secondary text-light"
+            className="w-full p-4 bg-gray-700 rounded-lg border border-gray-500 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="I can help optimize your workflows with neural networks."
           />
-        </div>
-
-        {/* Buttons */}
-        <div className="mt-4 d-flex gap-3">
-          <Button variant="primary" size="lg">
+        </motion.div>
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={fadeIn}
+          className="mt-6 flex space-x-4"
+        >
+          <Button
+            className="px-6 py-3 bg-gradient-to-tr from-purple-500 to-blue-600 rounded-xl hover:scale-105 transition-transform"
+            size="lg"
+          >
             Deploy Your AI Agent
           </Button>
-          <Button variant="secondary" size="lg">
+          <Button
+            className="px-6 py-3 bg-gray-700 rounded-xl hover:bg-gray-600 transition-colors"
+            size="lg"
+          >
             Watch Demo
           </Button>
-        </div>
-      </div>
+        </motion.div>
+      </motion.section>
 
       {/* AI Features Section */}
-      <div className="bg-black text-white py-5">
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={fadeIn}
+        className="bg-black text-white py-5"
+        id="features"
+      >
         <Container className="text-center">
-          {/* Section Title */}
-          <h2 className="text-info fw-bold display-5">
+          <h2 className="fw-bold display-5 bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 text-transparent bg-clip-text">
             Powered by Advanced AI
           </h2>
           <p className="text-secondary mb-4">
             Built on cutting-edge neural architectures
           </p>
-
-          {/* Feature Cards */}
           <Row className="g-4">
-            <Col md={3} sm={6}>
-              <Card className="bg-dark text-white border-0 p-3 h-100">
-                <Card.Body className="d-flex flex-column h-100 text-center">
-                  <BsCpu size={40} className="text-primary mb-3" />
-                  <Card.Title>Neural Networks</Card.Title>
-                  <Card.Text className="mt-auto">
-                    Advanced neural architectures for complex decision making.
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-
-            <Col md={3} sm={6}>
-              <Card className="bg-dark text-white border-0 p-3 h-100">
-                <Card.Body className="d-flex flex-column h-100 text-center">
-                  <FaRobot size={40} className="text-primary mb-3" />
-                  <Card.Title>Deep Learning</Card.Title>
-                  <Card.Text className="mt-auto">
-                    Sophisticated deep learning models for pattern recognition.
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-
-            <Col md={3} sm={6}>
-              <Card className="bg-dark text-white border-0 p-3 h-100">
-                <Card.Body className="d-flex flex-column h-100 text-center">
-                  <BsCode size={40} className="text-primary mb-3" />
-                  <Card.Title>Advanced ML</Card.Title>
-                  <Card.Text className="mt-auto">
-                    Cutting-edge machine learning algorithms.
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-
-            <Col md={3} sm={6}>
-              <Card className="bg-dark text-white border-0 p-3 h-100">
-                <Card.Body className="d-flex flex-column h-100 text-center">
-                  <BsGlobe size={40} className="text-primary mb-3" />
-                  <Card.Title>Global Scale</Card.Title>
-                  <Card.Text className="mt-auto">
-                    Distributed AI processing across global networks.
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
+            {[
+              { icon: <BsCpu size={40} />, title: "Neural Networks", description: "Advanced neural architectures for complex decision making." },
+              { icon: <FaRobot size={40} />, title: "Deep Learning", description: "Sophisticated deep learning models for pattern recognition." },
+              { icon: <BsCode size={40} />, title: "Advanced ML", description: "Cutting-edge machine learning algorithms." },
+              { icon: <BsGlobe size={40} />, title: "Global Scale", description: "Distributed AI processing across global networks." },
+            ].map((feature, index) => (
+              <Col md={3} sm={6} key={index}>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Card className="bg-dark text-white border-0 p-3 h-100">
+                    <Card.Body className="d-flex flex-column h-100 text-center">
+                      <div className="text-primary mb-3">{feature.icon}</div>
+                      <Card.Title>{feature.title}</Card.Title>
+                      <Card.Text className="mt-auto">{feature.description}</Card.Text>
+                    </Card.Body>
+                  </Card>
+                </motion.div>
+              </Col>
+            ))}
           </Row>
         </Container>
-      </div>
+      </motion.div>
 
       {/* Neural Capabilities Section */}
-      <div className="bg-black text-white py-5">
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={fadeIn}
+        className="bg-black text-white py-5"
+      >
         <Container className="text-center">
-          {/* Section Title */}
-          <h2 className="text-info fw-bold display-5">Neural Capabilities</h2>
+        <h2 className="fw-bold display-5 bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 text-transparent bg-clip-text">Neural Capabilities</h2>
           <p className="text-secondary mb-4">
             Powered by next-generation artificial intelligence
           </p>
-
-          {/* Feature Cards */}
           <Row className="g-4">
-            <Col md={3} sm={6}>
-              <Card className="bg-dark text-white border-0 p-3 h-100">
-                <Card.Body className="d-flex flex-column h-100 text-center">
-                  <BsCpu size={40} className="text-primary mb-3" />
-                  <Card.Title>Autonomous Learning</Card.Title>
-                  <Card.Text className="mt-auto">
-                    Self-evolving neural networks that adapt to your business
-                    needs through reinforcement learning.
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-
-            <Col md={3} sm={6}>
-              <Card className="bg-dark text-white border-0 p-3 h-100">
-                <Card.Body className="d-flex flex-column h-100 text-center">
-                  <BsChatSquareText size={40} className="text-primary mb-3" />
-                  <Card.Title>Multi-Modal Intelligence</Card.Title>
-                  <Card.Text className="mt-auto">
-                    Advanced agents capable of processing text, voice, and
-                    visual data for comprehensive understanding.
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-
-            <Col md={3} sm={6}>
-              <Card className="bg-dark text-white border-0 p-3 h-100">
-                <Card.Body className="d-flex flex-column h-100 text-center">
-                  <BsCodeSlash size={40} className="text-primary mb-3" />
-                  <Card.Title>Cognitive Integration</Card.Title>
-                  <Card.Text className="mt-auto">
-                    Seamless integration with existing systems through advanced
-                    cognitive APIs and neural bridges.
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-
-            <Col md={3} sm={6}>
-              <Card className="bg-dark text-white border-0 p-3 h-100">
-                <Card.Body className="d-flex flex-column h-100 text-center">
-                  <BsShieldLock size={40} className="text-primary mb-3" />
-                  <Card.Title>Ethical AI Framework</Card.Title>
-                  <Card.Text className="mt-auto">
-                    Built-in ethical guidelines and safety protocols ensuring
-                    responsible AI deployment.
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
+            {[
+              { icon: <BsCpu size={40} />, title: "Autonomous Learning", description: "Self-evolving neural networks that adapt to your business needs through reinforcement learning." },
+              { icon: <BsChatSquareText size={40} />, title: "Multi-Modal Intelligence", description: "Advanced agents capable of processing text, voice, and visual data for comprehensive understanding." },
+              { icon: <BsCodeSlash size={40} />, title: "Cognitive Integration", description: "Seamless integration with existing systems through advanced cognitive APIs and neural bridges." },
+              { icon: <BsShieldLock size={40} />, title: "Ethical AI Framework", description: "Built-in ethical guidelines and safety protocols ensuring responsible AI deployment." },
+            ].map((feature, index) => (
+              <Col md={3} sm={6} key={index}>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Card className="bg-dark text-white border-0 p-3 h-100">
+                    <Card.Body className="d-flex flex-column h-100 text-center">
+                      <div className="text-primary mb-3">{feature.icon}</div>
+                      <Card.Title>{feature.title}</Card.Title>
+                      <Card.Text className="mt-auto">{feature.description}</Card.Text>
+                    </Card.Body>
+                  </Card>
+                </motion.div>
+              </Col>
+            ))}
           </Row>
         </Container>
-      </div>
+      </motion.div>
 
-      <div className="bg-black text-white py-5">
+      {/* Pricing Section */}
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={fadeIn}
+        className="bg-black text-white py-5"
+        id="pricing"
+      >
         <Container className="text-center">
-          {/* Section Title */}
-          <h2 className="text-primary fw-bold display-5">Choose Your Plan</h2>
+        <h2 className="fw-bold display-5 bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 text-transparent bg-clip-text">Choose Your Plan</h2>
           <p className="text-secondary mb-4">
             Scale your AI capabilities with our flexible pricing
           </p>
-
-          {/* Pricing Cards Section */}
           <Row className="g-4 justify-content-center">
-            {/* Starter Plan */}
-            <Col md={4}>
-              <Card className="bg-dark text-white border-0 p-4 h-100 shadow-sm">
-                <Card.Body className="text-center d-flex flex-column h-100">
-                  <h4 className="fw-bold">Starter</h4>
-                  <h2 className="text-white">
-                    $499<span className="fs-6">/month</span>
-                  </h2>
-                  <hr className="border-secondary" />
-                  <ul className="list-unstyled text-start gap-2">
-                    {[
-                      "2 AI Agent Instances",
-                      "Basic Neural Processing",
-                      "24/7 Support",
-                      "Weekly Analytics",
-                      "Basic Integration Support",
-                    ].map((item, index) => (
-                      <li key={index} className="d-flex align-items-center">
-                        <BsCheckCircle className="text-success me-2" /> {item}
-                      </li>
-                    ))}
-                  </ul>
-                  <Button variant="outline-light" className="w-100 mt-auto">
-                    Get Started
-                  </Button>
-                </Card.Body>
-              </Card>
-            </Col>
-
-            {/* Professional Plan (Highlighted) */}
-            <Col md={4}>
-              <Card
-                className="border-0 p-4 h-100 shadow-lg text-white d-flex flex-column"
-                style={{
-                  background: "linear-gradient(135deg, #6A0DAD, #4B0082)",
-                }}
-              >
-                <Card.Body className="text-center d-flex flex-column h-100">
-                  <h4 className="fw-bold">Professional</h4>
-                  <h2 className="text-white">
-                    $999<span className="fs-6">/month</span>
-                  </h2>
-                  <hr className="border-light" />
-                  <ul className="list-unstyled text-start gap-2">
-                    {[
-                      "10 AI Agent Instances",
-                      "Advanced Neural Networks",
-                      "Priority Support",
-                      "Real-time Analytics",
-                      "Custom Integration",
-                      "API Access",
-                      "Advanced Security",
-                    ].map((item, index) => (
-                      <li key={index} className="d-flex align-items-center">
-                        <BsCheckCircle className="text-light me-2" /> {item}
-                      </li>
-                    ))}
-                  </ul>
-                  <Button variant="light" className="w-100 mt-auto">
-                    Get Started
-                  </Button>
-                </Card.Body>
-              </Card>
-            </Col>
-
-            {/* Enterprise Plan */}
-            <Col md={4}>
-              <Card className="bg-dark text-white border-0 p-4 h-100 shadow-sm">
-                <Card.Body className="text-center d-flex flex-column h-100">
-                  <h4 className="fw-bold">Enterprise</h4>
-                  <h2 className="text-white">$Custom</h2>
-                  <hr className="border-secondary" />
-                  <ul className="list-unstyled text-start gap-2">
-                    {[
-                      "Unlimited Agents",
-                      "Full Neural Suite",
-                      "Dedicated Support Team",
-                      "Advanced Analytics Dashboard",
-                      "Custom Development",
-                      "Full API Access",
-                      "Enterprise Security",
-                      "Custom Training",
-                    ].map((item, index) => (
-                      <li key={index} className="d-flex align-items-center">
-                        <BsCheckCircle className="text-success me-2" /> {item}
-                      </li>
-                    ))}
-                  </ul>
-                  <Button variant="primary" className="w-100 mt-auto">
-                    Contact Us
-                  </Button>
-                </Card.Body>
-              </Card>
-            </Col>
+            {[
+              {
+                title: "Starter",
+                price: "$499/month",
+                features: [
+                  "2 AI Agent Instances",
+                  "Basic Neural Processing",
+                  "24/7 Support",
+                  "Weekly Analytics",
+                  "Basic Integration Support",
+                ],
+              },
+              {
+                title: "Professional",
+                price: "$999/month",
+                features: [
+                  "10 AI Agent Instances",
+                  "Advanced Neural Networks",
+                  "Priority Support",
+                  "Real-time Analytics",
+                  "Custom Integration",
+                  "API Access",
+                  "Advanced Security",
+                ],
+                highlight: true,
+              },
+              {
+                title: "Enterprise",
+                price: "$Custom",
+                features: [
+                  "Unlimited Agents",
+                  "Full Neural Suite",
+                  "Dedicated Support Team",
+                  "Advanced Analytics Dashboard",
+                  "Custom Development",
+                  "Full API Access",
+                  "Enterprise Security",
+                  "Custom Training",
+                ],
+              },
+            ].map((plan, index) => (
+              <Col md={4} key={index}>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Card
+                    className={`bg-dark text-white border-0 p-4 h-100 shadow-sm ${
+                      plan.highlight ? "shadow-lg" : ""
+                    }`}
+                    style={
+                      plan.highlight
+                        ? { background: "linear-gradient(135deg, #1E3A8A, #111827)" }
+                        : {}
+                    }
+                  >
+                    <Card.Body className="text-center d-flex flex-column h-100">
+                      <h4 className="fw-bold mb-3">{plan.title}</h4>
+                      <h2 className="text-white mb-3">{plan.price}</h2>
+                      <hr className={plan.highlight ? "border-light" : "border-secondary"} />
+                      <ul className="list-unstyled text-start gap-3">
+                        {plan.features.map((feature, i) => (
+                          <li key={i} className="d-flex align-items-center">
+                            <BsCheckCircle style={{ color: "#A020F0" }} className="me-2" /> {feature}
+                          </li>
+                        ))}
+                      </ul>
+                      <Button
+                        variant={plan.highlight ? "primary" : "outline-light"}
+                        className="w-100 mt-auto"
+                      >
+                        Get Started
+                      </Button>
+                    </Card.Body>
+                  </Card>
+                </motion.div>
+              </Col>
+            ))}
           </Row>
         </Container>
-      </div>
+      </motion.div>
 
-      <div className="bg-black text-white py-5">
-        <Container>
-          {/* Section Title */}
-          <h2 className="text-primary fw-bold text-center display-5">
+      {/* Contact Section */}
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={fadeIn}
+        className="bg-black text-white py-5"
+        id="contact"
+      >
+        <Container className="text-center">
+          <h2 className="fw-bold display-5 bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 text-transparent bg-clip-text">
             Get in Touch
           </h2>
-          <p className="text-secondary text-center mb-4">
+          <p className="text-secondary mb-4">
             Ready to transform your business with AI?
           </p>
-
           <Row className="align-items-center">
-            {/* Contact Information */}
             <Col md={5} className="mb-4 mb-md-0">
               <h5 className="fw-bold">Contact Information</h5>
               <div className="d-flex flex-column gap-2">
@@ -362,69 +355,59 @@ export default function HeroSection() {
                 </div>
               </div>
             </Col>
-
-            {/* Contact Form */}
             <Col md={7}>
-              <Form>
+              <Form onSubmit={handleSubmit}>
                 <Row className="g-3">
                   <Col md={6}>
-                    <FloatingLabel
-                      controlId="firstName"
-                      label="First Name"
-                      className="text-white"
-                    >
+                    <FloatingLabel controlId="firstName" label="First Name">
                       <Form.Control
                         type="text"
+                        name="firstName"
+                        value={formData.firstName}
+                        onChange={handleChange}
                         placeholder="First Name"
-                        className="bg-dark text-white border-secondary"
+                        className="bg-gray-900 text-light border-secondary"
                       />
                     </FloatingLabel>
                   </Col>
                   <Col md={6}>
-                    <FloatingLabel
-                      controlId="lastName"
-                      label="Last Name"
-                      className="text-white"
-                    >
+                    <FloatingLabel controlId="lastName" label="Last Name">
                       <Form.Control
                         type="text"
+                        name="lastName"
+                        value={formData.lastName}
+                        onChange={handleChange}
                         placeholder="Last Name"
-                        className="bg-dark text-white border-secondary"
+                        className="bg-gray-900 text-light border-secondary"
                       />
                     </FloatingLabel>
                   </Col>
                 </Row>
-
-                <FloatingLabel
-                  controlId="email"
-                  label="Email Address"
-                  className="mt-3 text-white"
-                >
+                <FloatingLabel controlId="email" label="Email Address" className="mt-3">
                   <Form.Control
                     type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     placeholder="Email Address"
-                    className="bg-dark text-white border-secondary"
+                    className="bg-gray-900 text-light border-secondary"
                   />
                 </FloatingLabel>
-
-                <FloatingLabel
-                  controlId="message"
-                  label="Your Message"
-                  className="mt-3 text-white"
-                >
+                <FloatingLabel controlId="message" label="Your Message" className="mt-3">
                   <Form.Control
                     as="textarea"
                     rows={4}
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
                     placeholder="Your Message"
-                    className="bg-dark text-white border-secondary"
+                    className="bg-gray-900 text-light border-secondary"
                   />
                 </FloatingLabel>
-
                 <Button
-                  className="w-100 mt-3 bg-gradient border-0"
-                  style={{
-                    background: "linear-gradient(135deg, #6A0DAD, #4B0082)",
-                  }}
+                  type="submit"
+                  className="w-100 mt-3 border-0 text-white"
+                  style={{ background: "linear-gradient(135deg, #7B1FA2, #303F9F)" }}
                 >
                   Send Message
                 </Button>
@@ -432,8 +415,9 @@ export default function HeroSection() {
             </Col>
           </Row>
         </Container>
-      </div>
+      </motion.div>
 
+      {/* Footer */}
       <footer className="bg-black text-white py-4">
         <Container>
           <Row className="gy-4">
@@ -451,7 +435,6 @@ export default function HeroSection() {
                 <a href="#" className="text-white">
                   <BsGithub size={20} />
                 </a>
-
                 <a href="#" className="text-white">
                   <BsLinkedin size={20} />
                 </a>
@@ -552,4 +535,6 @@ export default function HeroSection() {
       </footer>
     </>
   );
-}
+};
+
+export default LandingPage;
